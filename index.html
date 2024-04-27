@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="login-container">
+        <h2>HRMS Login</h2>
+        <form id="login-form" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showRegisterPage()">Register</a></p>
+    </div>
+
+    <!-- Register Page -->
+    <div class="register-container" id="register-container" style="display: none;">
+        <h2>Register</h2>
+        <form id="register-form" onsubmit="return registerUser()">
+            <div class="form-group">
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="new-username" required>
+            </div>
+            <div class="form-group">
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="new-password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="form-group">
+                <label for="new-role">Role:</label>
+                <select id="new-role" name="new-role" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showLoginPage()">Login</a></p>
+    </div>
+
+    <!-- HRMS Container -->
+    <div class="hrms-container" id="hrms-container" style="display: none;">
+        <header>
+            <h1>HR Management System</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#employee-info">Employee Information</a></li>
+                <li><a href="#payroll">Payroll Management</a></li>
+                <li><a href="#attendance-leave">Attendance & Leave Management</a></li>
+                <li><a href="#recruitment">Recruitment & Applicant Tracking</a></li>
+                <li><a href="#performance">Performance Management</a></li>
+            </ul>
+        </nav>
+        <section id="employee-info">
+            <h2>Employee Information Management</h2>
+            <form>
+                <label for="employee-name">Employee Name:</label>
+                <input type="text" id="employee-name" name="employee-name">
+                <label for="employee-email">Email:</label>
+                <input type="email" id="employee-email" name="employee-email">
+                <label for="employee-phone">Phone:</label>
+                <input type="tel" id="employee-phone" name="employee-phone">
+                <!-- Add more fields as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="payroll">
+            <h2>Payroll Management</h2>
+            <form>
+                <label for="employee-id">Employee ID:</label>
+                <input type="text" id="employee-id" name="employee-id">
+                <label for="salary">Salary:</label>
+                <input type="number" id="salary" name="salary">
+                <label for="tax">Tax:</label>
+                <input type="number" id="tax" name="tax">
+                <!-- Add more fields as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="attendance-leave">
+            <h2>Attendance & Leave Management</h2>
+            <form>
+                <label for="attendance-date">Date:</label>
+                <input type="date" id="attendance-date" name="attendance-date">
+                <label for="clock-in">Clock In:</label>
+                <input type="time" id="clock-in" name="clock-in">
+                <label for="clock-out">Clock Out:</label>
+                <input type="time" id="clock-out" name="clock-out">
+                <!-- Add more fields as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="recruitment">
+            <h2>Recruitment & Applicant Tracking</h2>
+            <form>
+                <label for="job-title">Job Title:</label>
+                <input type="text" id="job-title" name="job-title">
+                <label for="job-description">Job Description:</label>
+                <textarea id="job-description" name="job-description"></textarea>
+                <label for="applicant-name">Applicant Name:</label>
+                <input type="text" id="applicant-name" name="applicant-name">
+                <!-- Add more fields as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="performance">
+            <h2>Performance Management</h2>
+            <form>
+                <label for="employee-id-performance">Employee ID:</label>
+                <input type="text" id="employee-id-performance" name="employee-id-performance">
+                <label for="performance-rating">Performance Rating:</label>
+                <input type="number" id="performance-rating" name="performance-rating" min="1" max="5">
+                <label for="performance-review">Performance Review:</label>
+                <textarea id="performance-review" name="performance-review"></textarea>
+                <!-- Add more fields as needed -->
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <footer>
+            <p>&copy; 2024 HRMS Project. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var role = document.getElementById('role').value;
+
+            // Simple validation for demo purposes
+            if (username === "admin" && password === "admin" && role === "admin") {
+                alert("Login successful as Admin!");
+                document.getElementById("hrms-container").style.display = "block";
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("register-container").style.display = "none";
+                return false;
+            } else if (username === "employee" && password === "employee" && role === "employee") {
+                alert("Login successful as Employee!");
+                document.getElementById("hrms-container").style.display = "block";
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("register-container").style.display = "none";
+                return false;
+            } else {
+                alert("Invalid credentials or role!");
+                return false;
+            }
+        }
+
+        function showRegisterPage() {
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("register-container").style.display = "block";
+        }
+
+        function showLoginPage() {
+            document.getElementById("login-container").style.display = "block";
+            document.getElementById("register-container").style.display = "none";
+        }
+
+        function registerUser() {
+            // Add registration logic here
+            alert("Registration successful!");
+            showLoginPage();
+            return false;
+        }
+    </script>
+</body>
+</html>
